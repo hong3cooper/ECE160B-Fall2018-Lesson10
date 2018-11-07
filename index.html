@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>ECE160 - Lesson 8 - Intro to C++ & Classes</title>
+		<title>ECE160 - Lesson 10 - Classes - References, Copy Constructor, Operator Overloading, Inheritances & Composition</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -25,8 +25,8 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>ECE160 - Lesson 8</h1>
-					<h3>Intro to C++ & Classes</h3>
+					<h1>ECE160 - Lesson 10</h1>
+					<h3>Classes - References, Copy Constructor, Operator Overloading, Inheritances & Composition</h3>
 					<p>
 						<small>Professor Hong</small>
 					</p>
@@ -44,272 +44,59 @@
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## Basics of OOP - Object-Oriented Programming
+							## Name Control
 						</script>
 					</section>
 					
 					<section data-markdown>
 						<script type="text/template">
-							## Object-Oriented Programming
-							* Everything is an object
-							* A program is a bunch of objects telling each other what to do by sending messages.
-							* Each object has its own memory made up of other objects.
-							* Every objet has a type (each object is an instance of a class).
-							* All objects of a particular type can receive the same messages.
+							## Static Variables
+							* Object is created in a special static data area - static storage (instead of a stack)
+							* Local to a translation unit (the file it's in); controls the visibility of a name
+							* Not used too much in industry, but useful to know if you need to control variable scopes.
 						</script>
 					</section>
 					
 					<section data-markdown>
 						<script type="text/template">
-							## A Lightbulb
-							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/Light.png)
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Base and Derived Classes
-							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/BaseDerived.png)
-							* Can you think of other examples?
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Base and Derived Classes
-							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/Shape.png)
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Five Stages of Object Design
-							* Object discovery - classes
-							* Object assembly - members
-							* System construction - connection between objects
-							* System extension - restructuring, new classes, class hierarchies
-							* Object reuse - reusing for different applications
-						</script>
-					</section>
-				</section>
-				
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							## Basics of C++
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Hello, World!
+							## Static Object Destructors Example
 							```
-#include <iostream> // no .h needed in C++
-
-using namespace std; // needed to use streams w/o typing std::
-
-int main()
-{
-    cout << "Hello, world!" << endl; // printf in C++
-    return 0;
-}
-							```
-							* g++ hello.cpp
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## More about iostreams
-							```
-// Eckel, pg 96
-// C02: Stream2.cpp
-// More streams freatures
-
-#include <iostream>
-using namespace std;
-
-int main() 
-{
-    // Specifying formats with manipulators:
-    cout << "a number in decimal: "
-         << dec << 15 << endl;
-    cout << "in octal: " << oct << 15 << endl;
-    cout << "in hex: " << hex << 15 << endl;
-    cout << "a floating-point number: " << 3.14159 << endl;
-    cout << "non-printing char (escape): "
-         << char(27) << endl;
-
-    return 0;
-}
-							```
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Character array concatenation
-							```
-// C02: concat.cpp
-// Character array Concatenation
-
-#include <iostream>
-using namespace std;
-
-int main()
-{
-    cout << "This is far too long to put on a "
-      "single line but it can be broken up with "
-      "no ill effects\nas long as there is no "
-      "punctuation separating adjacent character "
-      " arrays.\n";
-
-    return 0;
-}
-							```
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Reading input
-							```
-// C02: numconv.cpp
-// Converts decimal to octal and hex
-
-#include <iostream>
-using namespace std;
-
-int main()
-{
-    int number;
-    cout << "Enter a decimal number: ";
-    cin >> number;
-    cout << "value in octal = 0"
-         << oct << number << endl;
-    cout << "value in hex = 0x"
-         << hex << number << endl;
-
-    return 0;
-}
-							```
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Strings
-							```
-// C02: hellostrings.cpp
-// The basics of the Standard C++ string class
-
-#include <string>
-#include <iostream>
-using namespace std;
-
-int main()
-{
-    string s1, s2; // Empty strings
-    string s3 = "Hello, World."; // Initialized
-    string s4("I am"); // Also initialized
-
-    s2 = "Today"; // Assigning to a string
-    s1 = s3 + " " + s4; // Combining strings
-    s1 += " 8 "; // Appending to a string
-
-    cout << s1 + s2 + "! or am I?" << endl;
-
-    return 0;
-}
-							```
-						</script>
-					</section>
-				</section>
-				
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							## Structs in C++
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Stack.h
-							```
-//: C04:Stack.h
+//: C10:StaticDestructors.cpp
 // From Thinking in C++, 2nd Edition
 // Available at http://www.BruceEckel.com
 // (c) Bruce Eckel 2000
 // Copyright notice in Copyright.txt
-// Nested struct in linked list
-#ifndef STACK_H
-#define STACK_H
+// Static object destructors
+#include <iostream>
+using namespace std;
 
-struct Stack {
-  struct Link {
-    void* data;
-    Link* next;
-    void initialize(void* dat, Link* nxt);
-  }* head;
-
-  void initialize();
-
-  void push(void* dat);
-  void* peek();
-  void* pop();
-
-  void cleanup();
+class Obj {
+  char c; // Identifier
+public:
+  Obj(char cc) : c(cc) {
+    cout << "Obj::Obj() for " << c << endl;
+  }
+  ~Obj() {
+    cout << "Obj::~Obj() for " << c << endl;
+  }
 };
-#endif // STACK_H ///:~
-							```
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Stack.cpp
-							```
-//: C04:Stack.cpp {O}
-// From Thinking in C++, 2nd Edition
-// Available at http://www.BruceEckel.com
-// (c) Bruce Eckel 2000
-// Copyright notice in Copyright.txt
-// Linked list with nesting
-#include <Stack.h>
-#include <require.h>
-using namespace std;
 
-void 
-Stack::Link::initialize(void* dat, Link* nxt) {
-  data = dat;
-  next = nxt;
+Obj a('a'); // Global (static storage)
+// Constructor & destructor always called
+
+void f() {
+  static Obj b('b');
 }
 
-void Stack::initialize() { head = 0; }
-
-void Stack::push(void* dat) {
-  Link* newLink = new Link;
-  newLink->initialize(dat, head);
-  head = newLink;
+void g() {
+  static Obj c('c');
 }
 
-void* Stack::peek() { 
-  require(head != 0, "Stack empty");
-  return head->data; 
-}
-
-void* Stack::pop() {
-  if(head == 0) return 0;
-  void* result = head->data;
-  Link* oldHead = head;
-  head = head->next;
-  delete oldHead;
-  return result;
-}
-
-void Stack::cleanup() {
-  require(head == 0, "Stack not empty");
+int main() {
+  cout << "inside main()" << endl;
+  f(); // Calls static constructor for b
+  // g() not called
+  cout << "leaving main()" << endl;
 } ///:~
 							```
 						</script>
@@ -317,189 +104,432 @@ void Stack::cleanup() {
 					
 					<section data-markdown>
 						<script type="text/template">
-							## StackTest.cpp
+							## Namespaces  
+							* std is a namespace for standard objects  
+							* You can create your own namespace to contain related objects  
+							
 							```
-//: C04:StackTest.cpp
+//: C10:BobsSuperDuperLibrary.cpp
 // From Thinking in C++, 2nd Edition
 // Available at http://www.BruceEckel.com
 // (c) Bruce Eckel 2000
 // Copyright notice in Copyright.txt
-//{L} Stack
-//{T} StackTest.cpp
-// Test of nested linked list
-#include <Stack.h>
-#include <require.h>
-#include <fstream>
+namespace BobsSuperDuperLibrary {
+  class Widget { /* ... */ };
+  class Poppit { /* ... */ };
+  // ...
+}
+// Too much to type! I'll alias it:
+namespace Bob = BobsSuperDuperLibrary;
+int main() {} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Anonymous Namespaces  
+							* Namespaces w/o names, but accessible in the translation/file.
+							
+							```
+//: C10:UnnamedNamespaces.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+namespace {
+  class Arm  { /* ... */ };
+  class Leg  { /* ... */ };
+  class Head { /* ... */ };
+  class Robot {
+    Arm arm[4];
+    Leg leg[16];
+    Head head[3];
+    // ...
+  } xanthan;
+  int i, j, k;
+}
+
+int main() {
+    Arm arm;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Static in Classes 
+							```
+//: C10:Statinit.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Scope of static initializer
 #include <iostream>
-#include <string>
 using namespace std;
 
-int main(int argc, char* argv[]) {
-  requireArgs(argc, 1); // File name is argument
-  ifstream in(argv[1]);
-  assure(in, argv[1]);
+int x = 100;
 
-  Stack textlines;
-  textlines.initialize();
-
-  string line;
-  // Read file and store lines in the Stack:
-  while(getline(in, line))
-    textlines.push(new string(line));
-  
-  // Pop the lines from the Stack and print them:
-  string* s;
-
-  while((s = (string*)textlines.pop()) != 0) {
-    cout << *s << endl;
-    delete s; 
+class WithStatic {
+  static int x;
+  static int y;
+public:
+  void print() const {
+    cout << "WithStatic::x = " << x << endl;
+    cout << "WithStatic::y = " << y << endl;
   }
+};
 
-  textlines.cleanup();
+int WithStatic::x = 1;
+int WithStatic::y = x + 1;
+// WithStatic::x NOT ::x
+
+int main() {
+  WithStatic ws;
+  ws.print();
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Singleton   
+							```
+//: C10:Singleton.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Static member of same type, ensures that
+// only one object of this type exists.
+// Also referred to as the "singleton" pattern.
+#include <iostream>
+using namespace std;
+
+class Egg {
+  static Egg e;
+  int i;
+  Egg(int ii) : i(ii) {}
+  Egg(const Egg&); // Prevent copy-construction
+public:
+  static Egg* instance() { return &e; }
+  int val() const { return i; }
+};
+
+Egg Egg::e(47);
+
+int main() {
+//!  Egg x(1); // Error -- can't create an Egg
+  // You can access the single instance:
+  cout << Egg::instance()->val() << endl;
+} ///:~
+							```
+						</script>
+					</section>
+					
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## References
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Reference Example
+							* A fancy pointer where you don't have to wonder if it's been initialized
+							* Usually used in function arguments  
+							
+							```
+//: C11:FreeStandingReferences.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+#include <iostream>
+using namespace std;
+
+// Ordinary free-standing reference:
+int y;
+int& r = y;
+// When a reference is created, it must 
+// be initialized to a live object. 
+// However, you can also say:
+const int& q = 12;  // (1)
+// References are tied to someone else's storage:
+int x = 0;          // (2)
+int& a = x;         // (3)
+int main() {
+  cout << "x = " << x << ", a = " << a << endl;
+  a++;
+  cout << "x = " << x << ", a = " << a << endl;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Rules
+							* A reference must be initialized when it's created (vs. pointers can be initialized anytime)
+							* Once a reference is initialized to an object, it cannot be changed to refer to another object (vs. pointers can be changed anytime)
+							* You cannot have NULL references. You must always be able to assume that a reference is connected to a legit piece of storage.
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## References in Functions
+							```
+		//: C11:Reference.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Simple C++ references
+
+#include <iostream>
+
+int* f(int* x) {
+  (*x)++;
+  return x; // Safe, x is outside this scope
+}
+
+int& g(int& x) {
+  x++; // Same effect as in f()
+  return x; // Safe, outside this scope
+}
+
+int& h() {
+  int q;
+//!  return q;  // Error
+  static int x;
+  return x; // Safe, x lives outside this scope
+}
+
+int main() {
+  int a = 0;
+  f(&a); // Ugly (but explicit)
+  std::cout << a << std::endl;
+  g(a);  // Clean (but hidden)
+  std::cout << a << std::endl;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Benefits of References
+							* It is more efficient to pass references than by value
+							* References is just an address while an object can be huge and copying it can be expensive!
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Modify the Professor Class to have reference arguments
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Copy-Constructor
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Basics
+							* Essential to passing and returning of user-defined types by value during function call 
+							* A default is created by the compiler, but it may not work as intended
+							
+							```
+	//: C11:HowMany.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// A class that counts its objects
+#include <fstream> // NOTE: File stream
+#include <string>
+using namespace std;
+ofstream out("HowMany.out");
+
+class HowMany {
+  static int objectCount;
+public:
+  HowMany() { objectCount++; }
+  static void print(const string& msg = "") {
+    if(msg.size() != 0) out << msg << ": ";
+    out << "objectCount = "
+         << objectCount << endl;
+  }
+  ~HowMany() {
+    objectCount--;
+    print("~HowMany()");
+  }
+};
+
+int HowMany::objectCount = 0;
+
+// Pass and return BY VALUE:
+HowMany f(HowMany x) {
+  x.print("x argument inside f()");
+  return x;
+}
+
+int main() {
+  HowMany h;
+  HowMany::print("after construction of h");
+  HowMany h2 = f(h);
+  HowMany::print("after call to f()");
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Fixing HowMany.cpp  
+							
+							```
+//: C11:HowMany2.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// The copy-constructor
+#include <fstream>
+#include <string>
+using namespace std;
+ofstream out("HowMany2.out");
+
+class HowMany2 {
+  string name; // Object identifier
+  static int objectCount;
+public:
+  HowMany2(const string& id = "") : name(id) {
+    ++objectCount;
+    print("HowMany2()");
+  }
+  ~HowMany2() {
+    --objectCount;
+    print("~HowMany2()");
+  }
+  // The copy-constructor:
+  HowMany2(const HowMany2& h) : name(h.name) {
+    name += " copy";
+    ++objectCount;
+    print("HowMany2(const HowMany2&)");
+  }
+  void print(const string& msg = "") const {
+    if(msg.size() != 0) 
+      out << msg << endl;
+    out << '\t' << name << ": "
+        << "objectCount = "
+        << objectCount << endl;
+  }
+};
+
+int HowMany2::objectCount = 0;
+
+// Pass and return BY VALUE:
+HowMany2 f(HowMany2 x) {
+  x.print("x argument inside f()");
+  out << "Returning from f()" << endl;
+  return x;
+}
+
+int main() {
+  HowMany2 h("h");
+  out << "Entering f()" << endl;
+  HowMany2 h2 = f(h);
+  h2.print("h2 after call to f()");
+  out << "Call f(), no return value" << endl;
+  f(h);
+  out << "After call to f()" << endl;
 } ///:~
 							```
 							
+							* Note the copy constructor is declared as HowMany2(const HowMany2 &h)
+							* Also note that variables can be initialized with the : var() syntax.
 						</script>
 					</section>
 					
 					<section data-markdown>
 						<script type="text/template">
-							## makefile
+							## Another copy constructor examle
 							```
-# Definitions for constants
-CC=g++
-CFLAGS = -I. 
+// from https://www.geeksforgeeks.org/copy-constructor-in-cpp/
 
-# This will create your final output using .o compiled files
-make: StackTest.o Stack.o
-	$(CC) $(CFLAGS) -o main StackTest.o Stack.o
+#include<iostream>
+#include<cstring>
+using namespace std;
 
-StackTest.o: StackTest.cpp Stack.h
-	$(CC) $(CFLAGS) -c StackTest.cpp -o StackTest.o
-
-Stack.o: Stack.cpp Stack.h
-	$(CC) $(CFLAGS) -c Stack.cpp -o Stack.o
-	
-# This will clean or remove compiled files so you can start fresh
-clean:
-	rm -f *.o *.exe getStuff/*.o
-							```
-							* ./main.exe test.txt
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## require.h
-							```
-//: :require.h
-// From Thinking in C++, 2nd Edition
-// Available at http://www.BruceEckel.com
-// (c) Bruce Eckel 2000
-// Copyright notice in Copyright.txt
-// Test for error conditions in programs
-// Local "using namespace std" for old compilers
-#ifndef REQUIRE_H
-#define REQUIRE_H
-#include <cstdio>
-#include <cstdlib>
-#include <fstream>
-#include <string>
-
-inline void require(bool requirement, 
-  const std::string& msg = "Requirement failed"){
-  using namespace std;
-  if (!requirement) {
-    fputs(msg.c_str(), stderr);
-    fputs("\n", stderr);
-    exit(1);
-  }
-}
-
-inline void requireArgs(int argc, int args, 
-  const std::string& msg = 
-    "Must use %d arguments") {
-  using namespace std;
-   if (argc != args + 1) {
-     fprintf(stderr, msg.c_str(), args);
-     fputs("\n", stderr);
-     exit(1);
-   }
-}
-
-inline void requireMinArgs(int argc, int minArgs,
-  const std::string& msg =
-    "Must use at least %d arguments") {
-  using namespace std;
-  if(argc < minArgs + 1) {
-    fprintf(stderr, msg.c_str(), minArgs);
-    fputs("\n", stderr);
-    exit(1);
-  }
-}
-  
-inline void assure(std::ifstream& in, 
-  const std::string& filename = "") {
-  using namespace std;
-  if(!in) {
-    fprintf(stderr, "Could not open file %s\n",
-      filename.c_str());
-    exit(1);
-  }
-}
-
-inline void assure(std::ofstream& out, 
-  const std::string& filename = "") {
-  using namespace std;
-  if(!out) {
-    fprintf(stderr, "Could not open file %s\n", 
-      filename.c_str());
-    exit(1);
-  }
-}
-#endif // REQUIRE_H ///:~
-							```
-						</script>
-					</section>
-				</section>
-				
-				<section>
-					<section data-markdown>
-						<script type="text/template">
-							## Basic Classes in C++
-						</script>
-					</section>
-					
-					<section data-markdown>
-						<script type="text/template">
-							## Stack.h
-							```
-//: C05:Stack2.h
-// From Thinking in C++, 2nd Edition
-// Available at http://www.BruceEckel.com
-// (c) Bruce Eckel 2000
-// Copyright notice in Copyright.txt
-// Nested structs via linked list
-#ifndef STACK2_H
-#define STACK2_H
-
-class Stack {
-  struct Link {
-    void* data;
-    Link* next;
-    void initialize(void* dat, Link* nxt);
-  }* head;
-
+class String
+{
+private:
+    char *s;
+    int size;
 public:
-  void initialize();
-  void push(void* dat);
-  void* peek();
-  void* pop();
-  void cleanup();
+    String(const char *str = NULL); // constructor
+    ~String() { delete [] s;  }// destructor
+    String(const String&); // copy constructor
+    void print() { cout << s << endl; } // Function to print string
+    void change(const char *);  // Function to change
 };
-#endif // STACK2_H ///:~
+
+String::String(const char *str)
+{
+    size = strlen(str);
+    s = new char[size+1];
+    strcpy(s, str);
+}
+
+void String::change(const char *str)
+{
+    delete [] s;
+    size = strlen(str);
+    s = new char[size+1];
+    strcpy(s, str);
+}
+
+String::String(const String& old_str)
+{
+    size = old_str.size;
+    s = new char[size+1];
+    strcpy(s, old_str.s);
+}
+
+int main()
+{
+    String str1("GeeksQuiz");
+    String str2 = str1;
+
+    str1.print(); // what is printed ?
+    str2.print();
+
+    str2.change("GeeksforGeeks");
+
+    str1.print(); // what is printed now ?
+    str2.print();
+    return 0;
+}
 							```
-							* Note public and private members.
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Can we modify the Professor class to require a copy constructor?
 						</script>
 					</section>
 				</section>
@@ -507,20 +537,937 @@ public:
 				<section>
 					<section data-markdown>
 						<script type="text/template">
-							## Class Exercise
-							* We will make a class with its functions together as a class.
-							* What derived classes do you think you will make?
+							## Operator Overloading
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## How to Overload an Operator
+							* <code>operator@</code> where @ is the operator being overloaded   
+							
+							```
+//: C12:OperatorOverloadingSyntax.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+#include <iostream>
+using namespace std;
+
+class Integer {
+public:
+  int i;
+  Integer(int ii) : i(ii) {}
+  const Integer
+  operator+(const Integer& rv) const {
+    cout << "operator+" << endl;
+    return Integer(i + rv.i);
+  }
+  Integer&
+  operator+=(const Integer& rv) {
+    cout << "operator+=" << endl;
+    i += rv.i;
+    return *this;
+  }
+};
+
+int main() {
+  cout << "built-in types:" << endl;
+  int i = 1, j = 2, k = 3;
+  k += i + j;
+  cout << "k = " << k << endl;
+  cout << "user-defined types:" << endl;
+  Integer ii(1), jj(2), kk(3);
+  kk += ii + jj;
+  cout << "kk = " << kk.i << endl;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Overloading Unary Operators
+							```
+//: C12:OverloadingUnaryOperators.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+#include <iostream>
+using namespace std;
+
+// Non-member functions:
+class Integer {
+  long i;
+  Integer* This() { return this; }
+public:
+  Integer(long ll = 0) : i(ll) {}
+  // No side effects takes const& argument:
+  friend const Integer&
+    operator+(const Integer& a);
+  friend const Integer
+    operator-(const Integer& a);
+  friend const Integer
+    operator~(const Integer& a);
+  friend Integer*
+    operator&(Integer& a);
+  friend int
+    operator!(const Integer& a);
+  // Side effects have non-const& argument:
+  // Prefix:
+  friend const Integer&
+    operator++(Integer& a);
+  // Postfix:
+  friend const Integer
+    operator++(Integer& a, int);
+  // Prefix:
+  friend const Integer&
+    operator--(Integer& a);
+  // Postfix:
+  friend const Integer
+    operator--(Integer& a, int);
+};
+
+// Global operators:
+const Integer& operator+(const Integer& a) {
+  cout << "+Integer\n";
+  return a; // Unary + has no effect
+}
+const Integer operator-(const Integer& a) {
+  cout << "-Integer\n";
+  return Integer(-a.i);
+}
+const Integer operator~(const Integer& a) {
+  cout << "~Integer\n";
+  return Integer(~a.i);
+}
+Integer* operator&(Integer& a) {
+  cout << "&Integer\n";
+  return a.This(); // &a is recursive!
+}
+int operator!(const Integer& a) {
+  cout << "!Integer\n";
+  return !a.i;
+}
+// Prefix; return incremented value
+const Integer& operator++(Integer& a) {
+  cout << "++Integer\n";
+  a.i++;
+  return a;
+}
+// Postfix; return the value before increment:
+const Integer operator++(Integer& a, int) {
+  cout << "Integer++\n";
+  Integer before(a.i);
+  a.i++;
+  return before;
+}
+// Prefix; return decremented value
+const Integer& operator--(Integer& a) {
+  cout << "--Integer\n";
+  a.i--;
+  return a;
+}
+// Postfix; return the value before decrement:
+const Integer operator--(Integer& a, int) {
+  cout << "Integer--\n";
+  Integer before(a.i);
+  a.i--;
+  return before;
+}
+
+// Show that the overloaded operators work:
+void f(Integer a) {
+  +a;
+  -a;
+  ~a;
+  Integer* ip = &a;
+  !a;
+  ++a;
+  a++;
+  --a;
+  a--;
+}
+
+// Member functions (implicit "this"):
+class Byte {
+  unsigned char b;
+public:
+  Byte(unsigned char bb = 0) : b(bb) {}
+  // No side effects: const member function:
+  const Byte& operator+() const {
+    cout << "+Byte\n";
+    return *this;
+  }
+  const Byte operator-() const {
+    cout << "-Byte\n";
+    return Byte(-b);
+  }
+  const Byte operator~() const {
+    cout << "~Byte\n";
+    return Byte(~b);
+  }
+  Byte operator!() const {
+    cout << "!Byte\n";
+    return Byte(!b);
+  }
+  Byte* operator&() {
+    cout << "&Byte\n";
+    return this;
+  }
+  // Side effects: non-const member function:
+  const Byte& operator++() { // Prefix
+    cout << "++Byte\n";
+    b++;
+    return *this;
+  }
+  const Byte operator++(int) { // Postfix
+    cout << "Byte++\n";
+    Byte before(b);
+    b++;
+    return before;
+  }
+  const Byte& operator--() { // Prefix
+    cout << "--Byte\n";
+    --b;
+    return *this;
+  }
+  const Byte operator--(int) { // Postfix
+    cout << "Byte--\n";
+    Byte before(b);
+    --b;
+    return before;
+  }
+};
+
+void g(Byte b) {
+  +b;
+  -b;
+  ~b;
+  Byte* bp = &b;
+  !b;
+  ++b;
+  b++;
+  --b;
+  b--;
+}
+
+int main() {
+  Integer a;
+  f(a);
+  Byte b;
+  g(b);
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Overloading Binary Operators - Integer.h
+							```
+//: C12:Integer.h
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Non-member overloaded operators
+#ifndef INTEGER_H
+#define INTEGER_H
+#include <iostream>
+
+// Non-member functions:
+class Integer { 
+  long i;
+public:
+  Integer(long ll = 0) : i(ll) {}
+  // Operators that create new, modified value:
+  friend const Integer
+    operator+(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator-(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator*(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator/(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator%(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator^(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator&(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator|(const Integer& left,
+              const Integer& right);
+  friend const Integer
+    operator<<(const Integer& left,
+               const Integer& right);
+  friend const Integer
+    operator>>(const Integer& left,
+               const Integer& right);
+  // Assignments modify & return lvalue:
+  friend Integer&
+    operator+=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator-=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator*=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator/=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator%=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator^=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator&=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator|=(Integer& left,
+               const Integer& right);
+  friend Integer&
+    operator>>=(Integer& left,
+                const Integer& right);
+  friend Integer&
+    operator<<=(Integer& left,
+                const Integer& right);
+  // Conditional operators return true/false:
+  friend int
+    operator==(const Integer& left,
+               const Integer& right);
+  friend int
+    operator!=(const Integer& left,
+               const Integer& right);
+  friend int
+    operator<(const Integer& left,
+              const Integer& right);
+  friend int
+    operator>(const Integer& left,
+              const Integer& right);
+  friend int
+    operator<=(const Integer& left,
+               const Integer& right);
+  friend int
+    operator>=(const Integer& left,
+               const Integer& right);
+  friend int
+    operator&&(const Integer& left,
+               const Integer& right);
+  friend int
+    operator||(const Integer& left,
+               const Integer& right);
+  // Write the contents to an ostream:
+  void print(std::ostream& os) const { os << i; }
+}; 
+#endif // INTEGER_H ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Overloading Binary Operators - Integer.cpp
+							```
+//: C12:Integer.cpp {O}
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Implementation of overloaded operators
+#include "Integer.h"
+#include "../require.h"
+
+const Integer
+  operator+(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i + right.i);
+}
+const Integer
+  operator-(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i - right.i);
+}
+const Integer
+  operator*(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i * right.i);
+}
+const Integer
+  operator/(const Integer& left,
+            const Integer& right) {
+  require(right.i != 0, "divide by zero");
+  return Integer(left.i / right.i);
+}
+const Integer
+  operator%(const Integer& left,
+            const Integer& right) {
+  require(right.i != 0, "modulo by zero");
+  return Integer(left.i % right.i);
+}
+const Integer
+  operator^(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i ^ right.i);
+}
+const Integer
+  operator&(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i & right.i);
+}
+const Integer
+  operator|(const Integer& left,
+            const Integer& right) {
+  return Integer(left.i | right.i);
+}
+const Integer
+  operator<<(const Integer& left,
+             const Integer& right) {
+  return Integer(left.i << right.i);
+}
+const Integer
+  operator>>(const Integer& left,
+             const Integer& right) {
+  return Integer(left.i >> right.i);
+}
+// Assignments modify & return lvalue:
+Integer& operator+=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i += right.i;
+   return left;
+}
+Integer& operator-=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i -= right.i;
+   return left;
+}
+Integer& operator*=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i *= right.i;
+   return left;
+}
+Integer& operator/=(Integer& left,
+                    const Integer& right) {
+   require(right.i != 0, "divide by zero");
+   if(&left == &right) {/* self-assignment */}
+   left.i /= right.i;
+   return left;
+}
+Integer& operator%=(Integer& left,
+                    const Integer& right) {
+   require(right.i != 0, "modulo by zero");
+   if(&left == &right) {/* self-assignment */}
+   left.i %= right.i;
+   return left;
+}
+Integer& operator^=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i ^= right.i;
+   return left;
+}
+Integer& operator&=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i &= right.i;
+   return left;
+}
+Integer& operator|=(Integer& left,
+                    const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i |= right.i;
+   return left;
+}
+Integer& operator>>=(Integer& left,
+                     const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i >>= right.i;
+   return left;
+}
+Integer& operator<<=(Integer& left,
+                     const Integer& right) {
+   if(&left == &right) {/* self-assignment */}
+   left.i <<= right.i;
+   return left;
+}
+// Conditional operators return true/false:
+int operator==(const Integer& left,
+               const Integer& right) {
+    return left.i == right.i;
+}
+int operator!=(const Integer& left,
+               const Integer& right) {
+    return left.i != right.i;
+}
+int operator<(const Integer& left,
+              const Integer& right) {
+    return left.i < right.i;
+}
+int operator>(const Integer& left,
+              const Integer& right) {
+    return left.i > right.i;
+}
+int operator<=(const Integer& left,
+               const Integer& right) {
+    return left.i <= right.i;
+}
+int operator>=(const Integer& left,
+               const Integer& right) {
+    return left.i >= right.i;
+}
+int operator&&(const Integer& left,
+               const Integer& right) {
+    return left.i && right.i;
+}
+int operator||(const Integer& left,
+               const Integer& right) {
+    return left.i || right.i;
+} ///:~
+							```
+							* Note that these are non-members; they can also be members of the class too.
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Operators You Can't Overload
+							* The dotoperator .
+							* The pointer to member dereference operator .*
+							* The scope resolution operator ::
+							* The conditional operators ? and :
+							* Your own user-defined operators
 						</script>
 					</section>
 				</section>
-			
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Assignment Operator in Classes
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Assignment Operator
+							* The = operator in the statement <code>a = b</code>
+							* The last piece of "orthodox canonical class form"    
+							
+							```
+//: C12:SimpleAssignment.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Simple operator=()
+#include <iostream>
+using namespace std;
+
+class Value {
+  int a, b;
+  float c;
+public:
+  Value(int aa = 0, int bb = 0, float cc = 0.0)
+    : a(aa), b(bb), c(cc) {}
+  Value& operator=(const Value& rv) {
+    a = rv.a;
+    b = rv.b;
+    c = rv.c;
+    return *this;
+  }
+  friend ostream&
+  operator<<(ostream& os, const Value& rv) {
+    return os << "a = " << rv.a << ", b = "
+      << rv.b << ", c = " << rv.c;
+  }
+};
+
+int main() {
+  Value a, b(1, 2, 3.3);
+  cout << "a: " << a << endl;
+  cout << "b: " << b << endl;
+  a = b;
+  cout << "a after assignment: " << a << endl;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## What about pointers?
+							```
+//: C12:CopyingWithPointers.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Solving the pointer aliasing problem by
+// duplicating what is pointed to during 
+// assignment and copy-construction.
+#include "require.h"
+#include <string>
+#include <iostream>
+using namespace std;
+
+class Dog {
+  string nm;
+public:
+  Dog(const string& name) : nm(name) {
+    cout << "Creating Dog: " << *this << endl;
+  }
+  // Synthesized copy-constructor & operator= 
+  // are correct.
+  // Create a Dog from a Dog pointer:
+  Dog(const Dog* dp, const string& msg) 
+    : nm(dp->nm + msg) {
+    cout << "Copied dog " << *this << " from "
+         << *dp << endl;
+  }
+  ~Dog() { 
+    cout << "Deleting Dog: " << *this << endl;
+  }
+  void rename(const string& newName) {
+    nm = newName;
+    cout << "Dog renamed to: " << *this << endl;
+  }
+  friend ostream&
+  operator<<(ostream& os, const Dog& d) {
+    return os << "[" << d.nm << "]";
+  }
+};
+
+class DogHouse {
+  Dog* p;
+  string houseName;
+public:
+  DogHouse(Dog* dog, const string& house)
+   : p(dog), houseName(house) {}
+  DogHouse(const DogHouse& dh)
+    : p(new Dog(dh.p, " copy-constructed")),
+      houseName(dh.houseName 
+        + " copy-constructed") {}
+  DogHouse& operator=(const DogHouse& dh) {
+    // Check for self-assignment:
+    if(&dh != this) {
+      p = new Dog(dh.p, " assigned");
+      houseName = dh.houseName + " assigned";
+    }
+    return *this;
+  }
+  void renameHouse(const string& newName) {
+    houseName = newName;
+  }
+  Dog* getDog() const { return p; }
+  ~DogHouse() { delete p; }
+  friend ostream&
+  operator<<(ostream& os, const DogHouse& dh) {
+    return os << "[" << dh.houseName 
+      << "] contains " << *dh.p;
+  }
+}; 
+
+int main() {
+  DogHouse fidos(new Dog("Fido"), "FidoHouse");
+  cout << fidos << endl;
+  DogHouse fidos2 = fidos; // Copy construction
+  cout << fidos2 << endl;
+  fidos2.getDog()->rename("Spot");
+  fidos2.renameHouse("SpotHouse");
+  cout << fidos2 << endl;
+  fidos = fidos2; // Assignment
+  cout << fidos << endl;
+  fidos.getDog()->rename("Max");
+  fidos2.renameHouse("MaxHouse");
+} ///:~
+							```
+							* You don't want to let the compile make the default for you when you deal with pointers!!
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Inheritance
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Composition
+							* A class in a class  
+							
+							```
+//: C14:Useful.h
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// A class to reuse
+#ifndef USEFUL_H
+#define USEFUL_H
+
+class X {
+  int i;
+public:
+  X() { i = 0; }
+  void set(int ii) { i = ii; }
+  int read() const { return i; }
+  int permute() { return i = i * 47; }
+};
+#endif // USEFUL_H ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Composition Example
+							```
+//: C14:Composition.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Reuse code with composition
+#include "Useful.h"
+
+class Y {
+  int i;
+public:
+  X x; // Embedded object
+  Y() { i = 0; }
+  void f(int ii) { i = ii; }
+  int g() const { return i; }
+};
+
+int main() {
+  Y y;
+  y.f(47);
+  y.x.set(37); // Access the embedded object
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Inheritance
+							* Inherits members and functions from parent/base class  
+							
+							```
+//: C14:Inheritance.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Simple inheritance
+#include "Useful.h"
+#include <iostream>
+using namespace std;
+
+class Y : public X {
+  int i; // Different from X's i
+public:
+  Y() { i = 0; }
+  int change() {
+    i = permute(); // Different name call
+    return i;
+  }
+  void set(int ii) {
+    i = ii;
+    X::set(ii); // Same-name function call
+  }
+};
+
+int main() {
+  cout << "sizeof(X) = " << sizeof(X) << endl;
+  cout << "sizeof(Y) = "
+       << sizeof(Y) << endl;
+  Y D;
+  D.change();
+  // X function interface comes through:
+  D.read();
+  D.permute();
+  // Redefined functions hide base versions:
+  D.set(12);
+} ///:~
+							```
+							* Note the keyword public before X. It keeps the public-ness of the members of the base class.
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Another Syntax for the Constructor
+							```
+//: C14:PseudoConstructor.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+class X {
+  int i;
+  float f;
+  char c;
+  char* s;
+public:
+  X() : i(7), f(1.4), c('x'), s("howdy") {}
+};
+
+int main() {
+  X x;
+  int i(100);  // Applied to ordinary definition
+  int* ip = new int(47);
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Order of Constructors & Destructors of Derived Classes
+							```
+//: C14:Order.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Constructor/destructor order
+#include <fstream>
+using namespace std;
+ofstream out("order.out");
+
+#define CLASS(ID) class ID { \
+public: \
+  ID(int) { out << #ID " constructor\n"; } \
+  ~ID() { out << #ID " destructor\n"; } \
+};
+
+CLASS(Base1);
+CLASS(Member1);
+CLASS(Member2);
+CLASS(Member3);
+CLASS(Member4);
+
+class Derived1 : public Base1 {
+  Member1 m1;
+  Member2 m2;
+public:
+  Derived1(int) : m2(1), m1(2), Base1(3) {
+    out << "Derived1 constructor\n";
+  }
+  ~Derived1() {
+    out << "Derived1 destructor\n";
+  }
+};
+
+class Derived2 : public Derived1 {
+  Member3 m3;
+  Member4 m4;
+public:
+  Derived2() : m3(1), Derived1(2), m4(3) {
+    out << "Derived2 constructor\n";
+  }
+  ~Derived2() {
+    out << "Derived2 destructor\n";
+  }
+};
+
+int main() {
+  Derived2 d2;
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Functions That Don't Automatically Inherit
+							* Constructors
+							* Destructors
+							* Assignment Operator
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Choosing Composition vs. Inheritance
+							* Composition - when you want the features of an existing class inside your new class, but not the interface (functions)
+							* Composition - "has a" relationship
+							* Inheritance - when you want the members and functions of a base clas
+							* Inheritance - "is a" relationship
+						</script>
+					</section>
+				</section>
+				
+				<section data-markdown>
+					<script type="text/template">
+						## Protected
+					</script>
+					
+					<script type="text/template">
+						## Protected Example
+						* Protected means it is private to everything outside of the class and its derived classes.  
+						
+						```
+//: C14:Protected.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// The protected keyword
+#include <fstream>
+using namespace std;
+
+class Base {
+  int i;
+protected:
+  int read() const { return i; }
+  void set(int ii) { i = ii; }
+public:
+  Base(int ii = 0) : i(ii) {}
+  int value(int m) const { return m*i; }
+};
+
+class Derived : public Base {
+  int j;
+public:
+  Derived(int jj = 0) : j(jj) {}
+  void change(int x) { set(x); }
+}; 
+
+int main() {
+  Derived d;
+  d.change(10);
+} ///:~
+						```
+					</script>
+				</section>
 				
 				<section data-markdown>
 					<script type="text/template">
 						## Homework
-						* Reading: Thinking in C++ Ch 1-5
-						<a href="https://classroom.github.com/g/xZ0L6CRo">
-						https://classroom.github.com/g/xZ0L6CRo
+						* Reading: Thinking in C++ Ch 10-12, 14
+						* <a href="https://classroom.github.com/g/IgZ74cMG">
+						https://classroom.github.com/g/IgZ74cMG
 						</a>
 					</script>
 				</section>
