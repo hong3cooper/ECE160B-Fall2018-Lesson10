@@ -1,0 +1,547 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>ECE160 - Lesson 8 - Intro to C++ & Classes</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>ECE160 - Lesson 8</h1>
+					<h3>Intro to C++ & Classes</h3>
+					<p>
+						<small>Professor Hong</small>
+					</p>
+					
+				</section>
+						
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+						## Review & Questions
+						</textarea>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Basics of OOP - Object-Oriented Programming
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Object-Oriented Programming
+							* Everything is an object
+							* A program is a bunch of objects telling each other what to do by sending messages.
+							* Each object has its own memory made up of other objects.
+							* Every objet has a type (each object is an instance of a class).
+							* All objects of a particular type can receive the same messages.
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## A Lightbulb
+							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/Light.png)
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Base and Derived Classes
+							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/BaseDerived.png)
+							* Can you think of other examples?
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Base and Derived Classes
+							![alt text](https://github.com/hong3cooper/ECE160-Lesson8/raw/master/Shape.png)
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Five Stages of Object Design
+							* Object discovery - classes
+							* Object assembly - members
+							* System construction - connection between objects
+							* System extension - restructuring, new classes, class hierarchies
+							* Object reuse - reusing for different applications
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Basics of C++
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Hello, World!
+							```
+#include <iostream> // no .h needed in C++
+
+using namespace std; // needed to use streams w/o typing std::
+
+int main()
+{
+    cout << "Hello, world!" << endl; // printf in C++
+    return 0;
+}
+							```
+							* g++ hello.cpp
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## More about iostreams
+							```
+// Eckel, pg 96
+// C02: Stream2.cpp
+// More streams freatures
+
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+    // Specifying formats with manipulators:
+    cout << "a number in decimal: "
+         << dec << 15 << endl;
+    cout << "in octal: " << oct << 15 << endl;
+    cout << "in hex: " << hex << 15 << endl;
+    cout << "a floating-point number: " << 3.14159 << endl;
+    cout << "non-printing char (escape): "
+         << char(27) << endl;
+
+    return 0;
+}
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Character array concatenation
+							```
+// C02: concat.cpp
+// Character array Concatenation
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "This is far too long to put on a "
+      "single line but it can be broken up with "
+      "no ill effects\nas long as there is no "
+      "punctuation separating adjacent character "
+      " arrays.\n";
+
+    return 0;
+}
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Reading input
+							```
+// C02: numconv.cpp
+// Converts decimal to octal and hex
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int number;
+    cout << "Enter a decimal number: ";
+    cin >> number;
+    cout << "value in octal = 0"
+         << oct << number << endl;
+    cout << "value in hex = 0x"
+         << hex << number << endl;
+
+    return 0;
+}
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Strings
+							```
+// C02: hellostrings.cpp
+// The basics of the Standard C++ string class
+
+#include <string>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string s1, s2; // Empty strings
+    string s3 = "Hello, World."; // Initialized
+    string s4("I am"); // Also initialized
+
+    s2 = "Today"; // Assigning to a string
+    s1 = s3 + " " + s4; // Combining strings
+    s1 += " 8 "; // Appending to a string
+
+    cout << s1 + s2 + "! or am I?" << endl;
+
+    return 0;
+}
+							```
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Structs in C++
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Stack.h
+							```
+//: C04:Stack.h
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Nested struct in linked list
+#ifndef STACK_H
+#define STACK_H
+
+struct Stack {
+  struct Link {
+    void* data;
+    Link* next;
+    void initialize(void* dat, Link* nxt);
+  }* head;
+
+  void initialize();
+
+  void push(void* dat);
+  void* peek();
+  void* pop();
+
+  void cleanup();
+};
+#endif // STACK_H ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Stack.cpp
+							```
+//: C04:Stack.cpp {O}
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Linked list with nesting
+#include <Stack.h>
+#include <require.h>
+using namespace std;
+
+void 
+Stack::Link::initialize(void* dat, Link* nxt) {
+  data = dat;
+  next = nxt;
+}
+
+void Stack::initialize() { head = 0; }
+
+void Stack::push(void* dat) {
+  Link* newLink = new Link;
+  newLink->initialize(dat, head);
+  head = newLink;
+}
+
+void* Stack::peek() { 
+  require(head != 0, "Stack empty");
+  return head->data; 
+}
+
+void* Stack::pop() {
+  if(head == 0) return 0;
+  void* result = head->data;
+  Link* oldHead = head;
+  head = head->next;
+  delete oldHead;
+  return result;
+}
+
+void Stack::cleanup() {
+  require(head == 0, "Stack not empty");
+} ///:~
+							```
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## StackTest.cpp
+							```
+//: C04:StackTest.cpp
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+//{L} Stack
+//{T} StackTest.cpp
+// Test of nested linked list
+#include <Stack.h>
+#include <require.h>
+#include <fstream>
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main(int argc, char* argv[]) {
+  requireArgs(argc, 1); // File name is argument
+  ifstream in(argv[1]);
+  assure(in, argv[1]);
+
+  Stack textlines;
+  textlines.initialize();
+
+  string line;
+  // Read file and store lines in the Stack:
+  while(getline(in, line))
+    textlines.push(new string(line));
+  
+  // Pop the lines from the Stack and print them:
+  string* s;
+
+  while((s = (string*)textlines.pop()) != 0) {
+    cout << *s << endl;
+    delete s; 
+  }
+
+  textlines.cleanup();
+} ///:~
+							```
+							
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## makefile
+							```
+# Definitions for constants
+CC=g++
+CFLAGS = -I. 
+
+# This will create your final output using .o compiled files
+make: StackTest.o Stack.o
+	$(CC) $(CFLAGS) -o main StackTest.o Stack.o
+
+StackTest.o: StackTest.cpp Stack.h
+	$(CC) $(CFLAGS) -c StackTest.cpp -o StackTest.o
+
+Stack.o: Stack.cpp Stack.h
+	$(CC) $(CFLAGS) -c Stack.cpp -o Stack.o
+	
+# This will clean or remove compiled files so you can start fresh
+clean:
+	rm -f *.o *.exe getStuff/*.o
+							```
+							* ./main.exe test.txt
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## require.h
+							```
+//: :require.h
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Test for error conditions in programs
+// Local "using namespace std" for old compilers
+#ifndef REQUIRE_H
+#define REQUIRE_H
+#include <cstdio>
+#include <cstdlib>
+#include <fstream>
+#include <string>
+
+inline void require(bool requirement, 
+  const std::string& msg = "Requirement failed"){
+  using namespace std;
+  if (!requirement) {
+    fputs(msg.c_str(), stderr);
+    fputs("\n", stderr);
+    exit(1);
+  }
+}
+
+inline void requireArgs(int argc, int args, 
+  const std::string& msg = 
+    "Must use %d arguments") {
+  using namespace std;
+   if (argc != args + 1) {
+     fprintf(stderr, msg.c_str(), args);
+     fputs("\n", stderr);
+     exit(1);
+   }
+}
+
+inline void requireMinArgs(int argc, int minArgs,
+  const std::string& msg =
+    "Must use at least %d arguments") {
+  using namespace std;
+  if(argc < minArgs + 1) {
+    fprintf(stderr, msg.c_str(), minArgs);
+    fputs("\n", stderr);
+    exit(1);
+  }
+}
+  
+inline void assure(std::ifstream& in, 
+  const std::string& filename = "") {
+  using namespace std;
+  if(!in) {
+    fprintf(stderr, "Could not open file %s\n",
+      filename.c_str());
+    exit(1);
+  }
+}
+
+inline void assure(std::ofstream& out, 
+  const std::string& filename = "") {
+  using namespace std;
+  if(!out) {
+    fprintf(stderr, "Could not open file %s\n", 
+      filename.c_str());
+    exit(1);
+  }
+}
+#endif // REQUIRE_H ///:~
+							```
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Basic Classes in C++
+						</script>
+					</section>
+					
+					<section data-markdown>
+						<script type="text/template">
+							## Stack.h
+							```
+//: C05:Stack2.h
+// From Thinking in C++, 2nd Edition
+// Available at http://www.BruceEckel.com
+// (c) Bruce Eckel 2000
+// Copyright notice in Copyright.txt
+// Nested structs via linked list
+#ifndef STACK2_H
+#define STACK2_H
+
+class Stack {
+  struct Link {
+    void* data;
+    Link* next;
+    void initialize(void* dat, Link* nxt);
+  }* head;
+
+public:
+  void initialize();
+  void push(void* dat);
+  void* peek();
+  void* pop();
+  void cleanup();
+};
+#endif // STACK2_H ///:~
+							```
+							* Note public and private members.
+						</script>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown>
+						<script type="text/template">
+							## Class Exercise
+							* We will make a class with its functions together as a class.
+							* What derived classes do you think you will make?
+						</script>
+					</section>
+				</section>
+			
+				
+				<section data-markdown>
+					<script type="text/template">
+						## Homework
+						* Reading: Thinking in C++ Ch 1-5
+						<a href="https://classroom.github.com/g/xZ0L6CRo">
+						https://classroom.github.com/g/xZ0L6CRo
+						</a>
+					</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
